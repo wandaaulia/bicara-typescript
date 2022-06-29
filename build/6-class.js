@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 class Root {
 }
 let User = (() => {
@@ -10,36 +9,34 @@ let User = (() => {
             this.id = id;
             this.firstName = firstName;
             this.lastName = lastName;
-            this.save = false;
-            this.token = "";
+            this.save = true;
+            this.token = true;
             this.done = false;
         }
         login(username, password) {
             this.retryLogin += 1;
-            if (username == "admin" && password == "admin") {
+            if (username === "admin" && password === "admin") {
                 return true;
             }
-            if (this.retryLogin >= User.MAX_FAILED_LOGIN) {
+            if (this.retryLogin >= User.MAX_LOGIN) {
                 return "max login attempted";
             }
             return false;
         }
-        register() { }
     }
-    User.MAX_FAILED_LOGIN = 2;
+    User.MAX_LOGIN = 2;
     return User;
 })();
-User.MAX_FAILED_LOGIN = 4;
-let myUser = new User(1, "john", "dodo");
-console.log(myUser.login("", ""));
-console.log(myUser.login("", ""));
-console.log(myUser.login("", ""));
-console.log(myUser.login("admin", "admin"));
-class EnhacementUser extends User {
+class myuser extends User {
     constructor(location, id, firstName, lastName) {
         super(id, firstName, lastName);
         this.location = location;
-        this.save;
+        this.save = false;
     }
 }
-let myNewUser = new EnhacementUser("medan", 2, "ucok", "cool");
+let user1 = new User(1, "ika", "gor");
+let user2 = new myuser("jakra", 1, "ika", "bakar");
+User.MAX_LOGIN = 3;
+console.log(user1.login("", ""));
+console.log(user1.login("", ""));
+console.log(user1.login("", ""));
